@@ -71,6 +71,37 @@ def print_display(disp: List[str]) -> None:
 		print(f'{i:>50}')
 
 
+game_data = random_word(FILE_NAME)
+attempt = 0
+while True:
+	if attempt > 5:
+		print(f'Игра закончена. Вы проиграли!\nБыло загадано слово: {game_data[0]}.')
+		break
+	user_input = input('Введите слово из 5 букв. Выйти - введите "В":\n').upper()
+	if user_input == 'В':
+		print('Игра закончена. Спасибо за игру!')
+		break
+	if user_input == game_data[0]:
+		print('Вы выиграли! Поздравляем!')
+		break
+	if len(user_input) != 5:
+		print('Вы должны ввести слово из 5 букв!')
+		continue
+	with open('dictionary.txt', 'r+', encoding='utf-8') as file:
+		if user_input not in file.read():
+			print(
+				'Такого слова нет в словаре.\nЕсли уверены, что слово существует,\nвы можете добавить его в словарь')
+			choice = input('Добавить в словарь? Д/Н: ').upper()
+			if choice == 'Д':
+				file.seek(0, 2)  # перемещение курсора в конец файла
+				file.write(user_input.upper() + '\n')
+				print('Слово добавлено в словарь!')
+			continue
+		else:
+			print("Продолжаем игру!")
+			attempt += 1
+			continue
+
 # if __name__ == '__main__':
 # 	dictionary_preparation(URL, FILE_NAME)
 # 	print(random_word(FILE_NAME))
