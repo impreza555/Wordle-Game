@@ -79,7 +79,7 @@ def main(user_word: str, g_data: tuple, disp: list, att_number: int) -> list:
     """
     Главная функция. Реализует логику игры.
     :param user_word: str - пользовательское слово.
-    :param g_data: tuple - кортеж: слово, индексы букв и количество вхождений каждой буквы в слове.
+    :param g_data: tuple - кортеж: индексы букв и количество вхождений каждой буквы в слове.
     :param disp: list - игровое поле.
     :param att_number: int - номер текущей попытки.
     :return: list - изменённое игровое поле.
